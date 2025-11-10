@@ -1,0 +1,12 @@
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Dependency directories
+node_modules/
+
+# Build output
+dist/
+build/
+coverage/

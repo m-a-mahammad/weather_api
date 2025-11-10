@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <style>
+    body {
+      background-color: #f4f6f8;
+    }
+
+    form {
+      max-width: 400px;
+      margin: 2rem auto;
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    input#city {
+      flex: 1;
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    input#city:focus {
+      border-color: #0077b6;
+    }
+
+    button[type="submit"] {
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #023e8a;
+    }
+
+    #wResult {
+      max-width: 400px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+      background-color: white;
+      text-align: center;
+    }
+
+    #wCity {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #0077b6;
+    }
+
+    #wIcon {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 1rem;
+    }
+
+    #wResult p {
+      margin: 0.5rem 0;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    #wTemp,
+    #wFeelsLike {
+      font-weight: bold;
+      color: #d62828;
+    }
+
+    #wHumidity,
+    #wWindSpeed,
+    #wCondition {
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+  <form action="/weather" method="get">
+    <input type="text" id="city" name="city" placeholder="Enter city name" required>
+    <button type="submit">Get Weather</button>
+  </form>
+
+  <div id="wResult">
+    <% if (data) { %>
+      <h2 id="wCity">Weather in <%= data.name %> (<%= data.sys.country %>)</h2>
+      <img id="wIcon" src="https://openweathermap.org/img/wn/<%= data.weather[0].icon %>@2x.png" alt="">
+      <p id="wCondition">Current Weather: <%= data.weather[0].description %></p>
+      <p id="wTemp">Temperature: <%= data.main.temp %>°C</p>
+      <p id="wFeelsLike">Feels Like: <%= data.main.feels_like %>°C</p>
+      <p id="wHumidity">Humidity: <%= data.main.humidity %>%</p>
+      <p id="wWindSpeed">Wind Speed: <%= data.wind.speed %> m/s</p>
+      <% } else { %>
+        <p>
+          <%= null %>
+        </p>
+        <% } %>
+  </div>
+</body>
+
+</html>
